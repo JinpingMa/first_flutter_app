@@ -13,7 +13,6 @@ class _MinePageState extends State<MinePage> {
   String dept = '';
   String roleName = '';
   String phone = '';
-
 //  DioManager().post()
   Future getData() async {
     print('http post:=========');
@@ -103,7 +102,7 @@ class _MinePageState extends State<MinePage> {
                   color: Color(0xFFFFFFFF),
                 ),
                 child: CupertinoButton(
-//                  onPressed: () => logOut(context),
+                  onPressed: () => logOut(context),
                   child: Text('登出',
                       style: TextStyle(color: Color(0xFFe83f34), fontSize: 16)),
                 ))
@@ -116,4 +115,6 @@ void logOut(context) {
   Navigator.of(context).pushAndRemoveUntil(
       new MaterialPageRoute(builder: (context) => new LoginPage()),
       (route) => route == null);
+//  Navigator.of(context).pushNamedAndRemoveUntil(
+//      "/loginPage", ModalRoute.withName("/loginPage"));
 }

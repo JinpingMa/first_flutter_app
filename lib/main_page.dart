@@ -16,7 +16,7 @@ bool get isIOS => foundation.defaultTargetPlatform == TargetPlatform.iOS;
 
 //void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AppState>(

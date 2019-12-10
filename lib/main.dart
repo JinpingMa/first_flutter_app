@@ -10,7 +10,7 @@ import 'package:f_stellar_app/data/models.dart';
 import 'package:f_stellar_app/data/veggie.dart';
 import 'package:f_stellar_app/widgets.dart';
 import 'package:f_stellar_app/adaptive_widgets.dart';
-import 'package:f_stellar_app/mine_page.dart';
+import 'package:f_stellar_app/main_page.dart';
 import 'package:f_stellar_app/login.dart';
 
 bool get isIOS => foundation.defaultTargetPlatform == TargetPlatform.iOS;
@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
               initialRoute: '/',
               routes: <String, WidgetBuilder>{
                   '/': (BuildContext context) => LoginPage(),
-                  '/main_page': (BuildContext context) => MinePage()
+                  '/loginPage': (BuildContext context) => LoginPage(),
+                  '/main_page': (BuildContext context) => MainPage()
                 })
           : MaterialApp(
               theme: ThemeData(
@@ -41,16 +42,10 @@ class MyApp extends StatelessWidget {
               initialRoute: '/',
               routes: <String, WidgetBuilder>{
                   '/': (BuildContext context) => LoginPage(),
-                  '/main_page': (BuildContext context) => MinePage()
+                '/loginPage': (BuildContext context) => LoginPage(),
+                '/main_page': (BuildContext context) => MainPage()
                 }),
     );
 
-//      MaterialApp(
-//      title: '狮子座',
-//        initialRoute: '/',
-//        routes: <String, WidgetBuilder>{
-//        '/': (BuildContext context) => LoginPage(),
-//        '/main_page': (BuildContext context) => MinePage()
-//    });
   }
 }
