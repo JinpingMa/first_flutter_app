@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:f_stellar_app/data/models.dart';
 import 'package:f_stellar_app/data/veggie.dart';
-import 'package:f_stellar_app/main.dart';
+import 'package:f_stellar_app/main_page.dart';
 
 import 'adaptive_widgets.dart';
 
