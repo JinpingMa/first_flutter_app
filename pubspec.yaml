@@ -63,6 +63,7 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
 
   assets:
+    - assets/images/lion.png
     - assets/images/apple.jpg
     - assets/images/artichoke.jpg
     - assets/images/asparagus.jpg
