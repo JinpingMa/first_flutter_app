@@ -15,8 +15,6 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
 
   void login(context) {
-    print('http post:=========');
-
     Map<String, String> params = {
       "accountName": emailController.text,
       "password": passwordController.text
@@ -129,6 +127,14 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         appBar: CupertinoNavigationBar(
           middle: Text('獅子座'),
+          backgroundColor: Colors.white,
+          border: Border(
+              bottom: BorderSide(
+                color: Colors.white,
+                width: 0.0, // One physical pixel.
+                style: BorderStyle.none,
+              )
+          ),
         ),
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,

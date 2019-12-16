@@ -11,6 +11,7 @@ import 'package:f_stellar_app/data/veggie.dart';
 import 'package:f_stellar_app/widgets.dart';
 import 'package:f_stellar_app/adaptive_widgets.dart';
 import 'package:f_stellar_app/mine_page.dart';
+import 'package:f_stellar_app/shop_form.dart';
 
 bool get isIOS => foundation.defaultTargetPlatform == TargetPlatform.iOS;
 
@@ -62,7 +63,7 @@ class AdaptiveMainScreen extends StatelessWidget {
             case 1:
               return CupertinoTabView(builder: (context) => LogScreen(),);
             case 2:
-              return CupertinoTabView(builder: (context) => LogScreen(),);
+              return CupertinoTabView(builder: (context) => ShopForm(),);
             case 3:
               return CupertinoTabView(
                   builder: (context) => ListScreen(),

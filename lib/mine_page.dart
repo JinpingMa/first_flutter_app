@@ -13,6 +13,7 @@ class _MinePageState extends State<MinePage> {
   String dept = '';
   String roleName = '';
   String phone = '';
+  String avatar = '';
 //  DioManager().post()
   Future getData() async {
     print('http post:=========');
@@ -28,10 +29,12 @@ class _MinePageState extends State<MinePage> {
       print(data);
       setState(() {
         //更新UI等
-        userName = data['data']['userName'];
-        dept = data['data']['dept'];
-        roleName = data['data']['roleName'];
-        phone = data['data']['phone'];
+        final userInfo = data['data'];
+        userName = userInfo['userName'];
+        dept = userInfo['dept'];
+        roleName = userInfo['roleName'];
+        phone = userInfo['phone'];
+        avatar = userInfo['avatar'];
       });
     },
         //错误回调
@@ -80,8 +83,7 @@ class _MinePageState extends State<MinePage> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/cauliflower.jpg'),
+                                  image: NetworkImage(avatar),
                                   fit: BoxFit.cover))),
                       Text(userName == null ? '' : userName,
                           style: TextStyle(

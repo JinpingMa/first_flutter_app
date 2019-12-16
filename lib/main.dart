@@ -12,6 +12,7 @@ import 'package:f_stellar_app/widgets.dart';
 import 'package:f_stellar_app/adaptive_widgets.dart';
 import 'package:f_stellar_app/main_page.dart';
 import 'package:f_stellar_app/login.dart';
+import 'package:f_stellar_app/home.dart';
 
 bool get isIOS => foundation.defaultTargetPlatform == TargetPlatform.iOS;
 
@@ -30,8 +31,9 @@ class MyApp extends StatelessWidget {
               ),
               initialRoute: '/',
               routes: <String, WidgetBuilder>{
-                  '/': (BuildContext context) => LoginPage(),
-                  '/loginPage': (BuildContext context) => LoginPage(),
+                  '/': (BuildContext context) => HomePage(),
+                '/home': (BuildContext context) => HomePage(),
+                '/loginPage': (BuildContext context) => LoginPage(),
                   '/main_page': (BuildContext context) => MainPage()
                 })
           : MaterialApp(
@@ -41,7 +43,8 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               initialRoute: '/',
               routes: <String, WidgetBuilder>{
-                  '/': (BuildContext context) => LoginPage(),
+                  '/': (BuildContext context) => HomePage(),
+                '/home': (BuildContext context) => HomePage(),
                 '/loginPage': (BuildContext context) => LoginPage(),
                 '/main_page': (BuildContext context) => MainPage()
                 }),
