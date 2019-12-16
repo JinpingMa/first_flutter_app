@@ -82,7 +82,7 @@ class _MinePageState extends State<MinePage> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                  image: NetworkImage(avatar),
+                                  image: avatar.length==0?AssetImage('assets/images/lion.png'):NetworkImage(avatar),
                                   fit: BoxFit.cover))),
                       Text(userName == null ? '' : userName,
                           style: TextStyle(
