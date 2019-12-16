@@ -4,6 +4,7 @@ import 'package:f_stellar_app/utils/request.dart';
 import 'package:f_stellar_app/main_page.dart';
 import 'package:f_stellar_app/login.dart';
 
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -40,7 +41,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    getData(context);
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      getData(context);
+      print("addPostFrameCallback be invoke");
+    });
+
   }
 
   @override
@@ -52,7 +57,6 @@ class _HomePageState extends State<HomePage> {
           radius: 48.0,
           child: Image.asset('assets/images/lion.png'),
         ));
-
     return Scaffold(body: Center(child: logo));
   }
 }

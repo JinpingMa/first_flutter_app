@@ -63,15 +63,15 @@ class AdaptiveMainScreen extends StatelessWidget {
             case 1:
               return CupertinoTabView(builder: (context) => LogScreen(),);
             case 2:
-              return CupertinoTabView(builder: (context) => ShopForm(),);
+              return CupertinoTabView(builder: (context) => ShopPage(),);
             case 3:
               return CupertinoTabView(
                   builder: (context) => ListScreen(),
                   defaultTitle: ListScreen.title);
             case 4:
-              return CupertinoTabView(builder: (context) => MinePage(),);
+              return CupertinoTabView(builder: (context) => ListScreen(),);
             default:
-              return CupertinoTabView(builder: (context) => MinePage(),);
+              return CupertinoTabView(builder: (context) => ListScreen(),);
           }
         },
       );

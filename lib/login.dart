@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
       if (data["x"]["ok"]) {
 //          Navigator.pushNamed(context, '/main_page');
 //      Navigator.of(context).pushAndRemoveUntil(
-//          new MaterialPageRoute(builder: (context) => new MyApp()),
+//          new MaterialPageRoute(builder: (context) => new MainPage()),
 //          (route) => route == null);
         Navigator.push(
             context,

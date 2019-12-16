@@ -16,7 +16,6 @@ class _MinePageState extends State<MinePage> {
   String avatar = '';
 //  DioManager().post()
   Future getData() async {
-    print('http post:=========');
 
     Map<String, String> params = {
       "accountName": "huijuan.chen@zuodashi.com",
@@ -114,9 +113,8 @@ class _MinePageState extends State<MinePage> {
 }
 
 void logOut(context) {
+//  context.ancestorWidgetOfExactType();
   Navigator.of(context).pushAndRemoveUntil(
       new MaterialPageRoute(builder: (context) => new LoginPage()),
       (route) => route == null);
-//  Navigator.of(context).pushNamedAndRemoveUntil(
-//      "/loginPage", ModalRoute.withName("/loginPage"));
 }

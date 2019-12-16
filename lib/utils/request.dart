@@ -27,7 +27,7 @@ class DioManager {
   void manageCookie() async{
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String appDocPath = appDocDir.path;
-    var cookieJar=PersistCookieJar(dir:appDocPath+"/.cookies/");
+    var cookieJar=PersistCookieJar(dir:appDocPath+"/.cookies");
     dio.interceptors.add(CookieManager(cookieJar));
   }
 
