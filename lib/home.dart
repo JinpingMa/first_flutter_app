@@ -10,31 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-//  void login(context) {
-//    Map<String, String> params = {
-//      "accountName": "jinping.ma@zuodashi.com",
-//      "password": "zuodashi2019"
-//    };
-//    DioManager.getInstance().post('UserLogin', params,
-//        //正常回调
-//        (data) {
-//      print(data);
-//      if (data["x"]["ok"]) {
-//        Navigator.of(context).pushAndRemoveUntil(
-//            new MaterialPageRoute(builder: (context) => new MainPage()),
-//            (route) => route == null);
-//      } else {
-//        Navigator.of(context).pushAndRemoveUntil(
-//            new MaterialPageRoute(builder: (context) => new LoginPage()),
-//            (route) => route == null);
-//      }
-//    },
-//        //错误回调
-//        (error) {
-//      print('error');
-//      print(error);
-//    });
-//  }
   void getData(context) {
     DioManager.getInstance().post('UserInfo', null,
         //正常回调

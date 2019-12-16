@@ -11,10 +11,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String errMsg = '';
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(text: "jinping.ma@zuodashi.com");
+  final passwordController = TextEditingController(text: "zuodashi2019");
 
-  void login(context) {
+  void login(context){
     Map<String, String> params = {
       "accountName": emailController.text,
       "password": passwordController.text

@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'dart:convert';
+import 'dart:io';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+
 //import 'package:'
 
 /*
@@ -21,6 +24,13 @@ class DioManager {
     return _instance;
   }
   Dio dio = new Dio();
+  void manageCookie() async{
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    String appDocPath = appDocDir.path;
+    var cookieJar=PersistCookieJar(dir:appDocPath+"/.cookies/");
+    dio.interceptors.add(CookieManager(cookieJar));
+  }
+
   DioManager() {
     // Set default configs
     dio.options.headers = {
@@ -30,9 +40,9 @@ class DioManager {
     dio.options.baseUrl = "https://api-dev.zuodashi.com/zefram.Zefram/";
     dio.options.connectTimeout = 5000;
     dio.options.receiveTimeout = 3000;
-
     dio.interceptors.add(LogInterceptor(responseBody: GlobalConfig.isDebug)); //是否开启请求日志
-    dio.interceptors.add(CookieManager(CookieJar()));//缓存相关类，具体设置见https://github.com/flutterchina/cookie_jar
+    manageCookie();
+//    dio.interceptors.add(CookieManager(CookieJar()));//缓存相关类，具体设置见https://github.com/flutterchina/cookie_jar
   }
 
   //get请求
