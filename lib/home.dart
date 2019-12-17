@@ -15,7 +15,19 @@ class _HomePageState extends State<HomePage> {
     DioManager.getInstance().post('UserInfo', null,
         //正常回调
             (data) {
-              print(data);
+              getData1(context);
+        },
+        //错误回调
+            (error) {
+          Navigator.of(context).pushAndRemoveUntil(
+                    new MaterialPageRoute(builder: (context) => new LoginPage()),
+                        (route) => route == null);
+        });
+  }
+  void getData1(context) {
+    DioManager.getInstance().post('UserInfo', null,
+        //正常回调
+            (data) {
               if (data["x"]["ok"]) {
                 Navigator.of(context).pushAndRemoveUntil(
                     new MaterialPageRoute(builder: (context) => new MainPage()),
@@ -28,8 +40,9 @@ class _HomePageState extends State<HomePage> {
         },
         //错误回调
             (error) {
-          print('error');
-          print(error);
+          Navigator.of(context).pushAndRemoveUntil(
+                    new MaterialPageRoute(builder: (context) => new LoginPage()),
+                        (route) => route == null);
         });
   }
   @override
