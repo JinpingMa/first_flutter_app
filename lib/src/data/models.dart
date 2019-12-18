@@ -9,8 +9,8 @@ import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:path_provider/path_provider.dart' as paths;
-import 'package:f_stellar_app/data/local_veggie_provider.dart';
-import 'package:f_stellar_app/data/veggie.dart';
+import 'package:f_stellar_app/src/data/local_veggie_provider.dart';
+import 'package:f_stellar_app/src/data/veggie.dart';
 
 part 'models.g.dart';
 

@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/cupertino.dart';
-import 'package:f_stellar_app/data/veggie.dart';
+import 'package:f_stellar_app/src/data/veggie.dart';
 
 class LocalVeggieProvider {
   static List<Veggie> veggies = [

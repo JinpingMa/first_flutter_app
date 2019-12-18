@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:f_stellar_app/utils/request.dart';
-import 'package:f_stellar_app/login.dart';
+import 'package:f_stellar_app/src/utils/request.dart';
+import 'package:f_stellar_app/src/login.dart';
 
-class MinePage extends StatefulWidget {
+class MineScreen extends StatefulWidget {
   @override
-  _MinePageState createState() => _MinePageState();
+  _MineScreenState createState() => _MineScreenState();
 }
 
-class _MinePageState extends State<MinePage> {
+class _MineScreenState extends State<MineScreen> {
   String userName = '';
   String dept = '';
   String roleName = '';

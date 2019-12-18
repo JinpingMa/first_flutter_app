@@ -1,4 +1,4 @@
-import 'package:f_stellar_app/utils/request.dart';
+import 'package:f_stellar_app/src/utils/request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -31,10 +31,10 @@ class _ShopPageState extends State < ShopPage > {
         },
         //错误回调
             (error) {
-              setState(() {
-                //更新UI等
-                clientList = [];
-              });
+          setState(() {
+            //更新UI等
+            clientList = [];
+          });
         });
   }
   @override
@@ -60,14 +60,14 @@ class _ShopPageState extends State < ShopPage > {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        onPressed: () {
-          print('form key data');
-          _formKey.currentState.save();
-          Fluttertoast.showToast(
-            msg: "This is Center Short Toast"
-          );
-          _formKey.currentState.reset();
-        },
+//        onPressed: () {
+//          print('form key data');
+//          _formKey.currentState.save();
+//          Fluttertoast.showToast(
+//            msg: "This is Center Short Toast"
+//          );
+//          _formKey.currentState.reset();
+//        },
         padding: EdgeInsets.all(12),
         color: Color(0xFFFF2D55),
         child: Text('提交', style: TextStyle(color: Colors.white)),
@@ -200,45 +200,64 @@ class _ShopPageState extends State < ShopPage > {
     //    List<Map<String,String>> allItem = formItem.addAll(contactList);
 
     return Scaffold(
-      appBar: CupertinoNavigationBar(
-        middle: Text('表单'),
+        appBar: CupertinoNavigationBar(
+          middle: Text('表单'),
+          backgroundColor: Colors.white,
+          border: Border(
+              bottom: BorderSide(
+                color: Colors.white,
+                width: 0.0, // One physical pixel.
+                style: BorderStyle.none,
+              )),
+        ),
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.white,
-            width: 0.0, // One physical pixel.
-            style: BorderStyle.none,
-          )),
-      ),
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Stack(children: < Widget > [
-          Form(
-            key: _formKey,
-            child: ListView.builder(
-              //                padding:
-              //                MediaQuery.of(context).padding + EdgeInsets.symmetric(vertical: 0),
-              itemCount: (formItem + contactList).length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 18.0,
-                    vertical: 8.0,
-                  ),
-                  child: CustomInputCell(
-                    (formItem + contactList)[index]['label'],
-                    (formItem + contactList)[index]['placeholder'],
-                    () => showPickerModal(parentContext)
-                  ),
-                );
-              },
-            )),
-          Positioned(
-            left: 20.0,
-            right: 20.0,
-            bottom: 90.0,
-            child: loginButton),
+        body: Center(
+            child: Stack(children: < Widget > [
+              Form(
+                  key: _formKey,
+                  child: ListView.builder(
+                    //                padding:
+                    //                MediaQuery.of(context).padding + EdgeInsets.symmetric(vertical: 0),
+                    itemCount: (formItem + contactList).length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 18.0,
+                          vertical: 8.0,
+                        ),
+                        child: CustomInputCell(
+                            (formItem + contactList)[index]['label'],
+                            (formItem + contactList)[index]['placeholder'],
+                                () => showPickerModal(parentContext)
+                        ),
+                      );
+                    },
+                  )),
+              Positioned(
+                  left: 20.0,
+                  right: 20.0,
+                  bottom: 90.0,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+//        onPressed: () {
+//          print('form key data');
+//          _formKey.currentState.save();
+//          Fluttertoast.showToast(
+//            msg: "This is Center Short Toast"
+//          );
+//          _formKey.currentState.reset();
+//        },
+                      onPressed: () {showPickerModal(parentContext);},
+                      padding: EdgeInsets.all(12),
+                      color: Color(0xFFFF2D55),
+                      child: Text('提交', style: TextStyle(color: Colors.white)),
+                    ),
+                  )),
 //          Positioned(
 //            left: 20.0,
 //            right: 20.0,
@@ -281,7 +300,7 @@ class _ShopPageState extends State < ShopPage > {
 //                )
 //              ]
 //            ) : Container(height: 0, width: 0, )),
-        ])));
+            ])));
   }
 }
 class CustomInputCell extends StatelessWidget {
@@ -292,35 +311,35 @@ class CustomInputCell extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return CupertinoButton(
-      padding: EdgeInsets.zero,
-      onPressed: onCellTap,
-      pressedOpacity: 1,
+        padding: EdgeInsets.zero,
+        onPressed: onCellTap,
+        pressedOpacity: 1,
         child: Row(
-        children: < Widget > [
-          Container(
-            width: 80,
-            child: Text(
-              label == null ? '' : label,
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width - 128,
-            child: TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              autofocus: false,
-              decoration: InputDecoration(
-                hintText: placeholder == null ? '' : placeholder,
-                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          children: < Widget > [
+            Container(
+              width: 80,
+              child: Text(
+                label == null ? '' : label,
               ),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
             ),
-          )
-        ],
-      ));
+            Container(
+              width: MediaQuery.of(context).size.width - 128,
+              child: TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                autofocus: false,
+                decoration: InputDecoration(
+                  hintText: placeholder == null ? '' : placeholder,
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+              ),
+            )
+          ],
+        ));
   }
 }

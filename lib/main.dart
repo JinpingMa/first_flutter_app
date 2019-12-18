@@ -6,13 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:f_stellar_app/data/models.dart';
-import 'package:f_stellar_app/data/veggie.dart';
-import 'package:f_stellar_app/widgets.dart';
-import 'package:f_stellar_app/adaptive_widgets.dart';
-import 'package:f_stellar_app/main_page.dart';
-import 'package:f_stellar_app/login.dart';
-import 'package:f_stellar_app/home.dart';
+import 'package:f_stellar_app/src/data/models.dart';
+import 'package:f_stellar_app/src/tabbar_screen.dart';
+import 'package:f_stellar_app/src/login.dart';
+import 'package:f_stellar_app/src/welcome_screen.dart';
 
 bool get isIOS => foundation.defaultTargetPlatform == TargetPlatform.iOS;
 
@@ -31,10 +28,10 @@ class MyApp extends StatelessWidget {
               ),
               initialRoute: '/',
               routes: <String, WidgetBuilder>{
-                  '/': (BuildContext context) => HomePage(),
-                '/home': (BuildContext context) => HomePage(),
+                  '/': (BuildContext context) => WelcomeScreen(),
+                '/home': (BuildContext context) => WelcomeScreen(),
                 '/loginPage': (BuildContext context) => LoginPage(),
-                  '/main_page': (BuildContext context) => MainPage()
+                  '/main_page': (BuildContext context) => NavigationBarScreen()
                 })
           : MaterialApp(
               theme: ThemeData(
@@ -43,10 +40,10 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               initialRoute: '/',
               routes: <String, WidgetBuilder>{
-                  '/': (BuildContext context) => HomePage(),
-                '/home': (BuildContext context) => HomePage(),
+                  '/': (BuildContext context) => WelcomeScreen(),
+                '/home': (BuildContext context) => WelcomeScreen(),
                 '/loginPage': (BuildContext context) => LoginPage(),
-                '/main_page': (BuildContext context) => MainPage()
+                '/main_page': (BuildContext context) => NavigationBarScreen()
                 }),
     );
 

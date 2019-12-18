@@ -7,7 +7,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
-import 'package:f_stellar_app/widgets.dart';
+import 'package:f_stellar_app/src/widgets.dart';
 
 bool get _isIOS => foundation.defaultTargetPlatform == TargetPlatform.iOS;
 

@@ -2,22 +2,23 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:f_stellar_app/src/picker_example/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:f_stellar_app/data/models.dart';
-import 'package:f_stellar_app/data/veggie.dart';
-import 'package:f_stellar_app/widgets.dart';
-import 'package:f_stellar_app/adaptive_widgets.dart';
-import 'package:f_stellar_app/mine_page.dart';
-import 'package:f_stellar_app/shop_form.dart';
+import 'package:f_stellar_app/src/data/models.dart';
+import 'package:f_stellar_app/src/data/veggie.dart';
+import 'package:f_stellar_app/src/widgets.dart';
+import 'package:f_stellar_app/src/adaptive_widgets.dart';
+import 'package:f_stellar_app/src/mine_screen.dart';
+import 'package:f_stellar_app/src/client/client_form.dart';
 
 bool get isIOS => foundation.defaultTargetPlatform == TargetPlatform.iOS;
 
 //void main() => runApp(MyApp());
 
-class MainPage extends StatelessWidget {
+class NavigationBarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AppState>(
@@ -60,11 +61,11 @@ class AdaptiveMainScreen extends StatelessWidget {
         tabBuilder: (context, index) {
           switch(index) {
             case 0:
-              return CupertinoTabView(builder: (context) => MinePage(),);
+              return CupertinoTabView(builder: (context) => PickerPage(),);
             case 1:
               return CupertinoTabView(builder: (context) => LogScreen(),);
             case 2:
-              return CupertinoTabView(builder: (context) => ShopPage(),);
+              return CupertinoTabView(builder: (context) => ClientFormScreen(),);
             case 3:
               return CupertinoTabView(
                   builder: (context) => ListScreen(),
@@ -72,7 +73,7 @@ class AdaptiveMainScreen extends StatelessWidget {
             case 4:
               return CupertinoTabView(builder: (context) => ListScreen(),);
             default:
-              return CupertinoTabView(builder: (context) => ListScreen(),);
+              return CupertinoTabView(builder: (context) => MineScreen(),);
           }
         },
       );

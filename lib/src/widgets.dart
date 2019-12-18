@@ -6,9 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:f_stellar_app/data/models.dart';
-import 'package:f_stellar_app/data/veggie.dart';
-import 'package:f_stellar_app/main_page.dart';
+import 'package:f_stellar_app/src/data/models.dart';
+import 'package:f_stellar_app/src/data/veggie.dart';
+import 'package:f_stellar_app/src/tabbar_screen.dart';
 
 import 'adaptive_widgets.dart';
 

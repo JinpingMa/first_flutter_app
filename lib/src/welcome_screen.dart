@@ -1,16 +1,17 @@
+import 'package:f_stellar_app/src/picker_example/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:f_stellar_app/utils/request.dart';
-import 'package:f_stellar_app/main_page.dart';
-import 'package:f_stellar_app/login.dart';
+import 'package:f_stellar_app/src/utils/request.dart';
+import 'package:f_stellar_app/src/tabbar_screen.dart';
+import 'package:f_stellar_app/src/login.dart';
 
 
-class HomePage extends StatefulWidget {
+class WelcomeScreen extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _WelcomeScreenState extends State<WelcomeScreen> {
   void getData(context) {
     DioManager.getInstance().post('UserInfo', null,
         //正常回调
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
             (data) {
               if (data["x"]["ok"]) {
                 Navigator.of(context).pushAndRemoveUntil(
-                    new MaterialPageRoute(builder: (context) => new MainPage()),
+                    new MaterialPageRoute(builder: (context) => new NavigationBarScreen()),
                         (route) => route == null);
               } else {
                 Navigator.of(context).pushAndRemoveUntil(

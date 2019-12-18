@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:f_stellar_app/utils/request.dart';
-import 'package:f_stellar_app/main_page.dart';
+import 'package:f_stellar_app/src/utils/request.dart';
+import 'package:f_stellar_app/src/tabbar_screen.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MainPage(),
+              builder: (context) => NavigationBarScreen(),
             ));
       } else {
         setState(() {
