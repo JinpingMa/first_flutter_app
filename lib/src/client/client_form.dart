@@ -1,3 +1,4 @@
+import 'package:f_stellar_app/src/data/area.dart';
 import 'package:f_stellar_app/src/utils/request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -156,7 +157,7 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
   showPicker(BuildContext context) {
     Picker picker = Picker(
         adapter: PickerDataAdapter<String>(
-            pickerdata: JsonDecoder().convert(clientTypeList)),
+            pickerdata: JsonDecoder().convert(AreaData)),
         changeToFirst: true,
         textAlign: TextAlign.left,
         textStyle: const TextStyle(color: Colors.blue),
@@ -168,7 +169,7 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
         cancelTextStyle: TextStyle(color: Colors.grey),
         onConfirm: (Picker picker, List value) {
           setState(() {
-            clientType = picker.getSelectedValues()[0];
+            clientType = picker.getSelectedValues().join(" ");
           });
         });
     picker.show(_scaffoldKey.currentState);

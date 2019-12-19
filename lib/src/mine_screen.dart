@@ -4,11 +4,15 @@ import 'package:f_stellar_app/src/utils/request.dart';
 import 'package:f_stellar_app/src/login.dart';
 
 class MineScreen extends StatefulWidget {
+  const MineScreen({this.parentContext}):super();
+  final BuildContext parentContext;
   @override
-  _MineScreenState createState() => _MineScreenState();
+  _MineScreenState createState() => _MineScreenState(parentContext:parentContext);
 }
 
 class _MineScreenState extends State<MineScreen> {
+  _MineScreenState({this.parentContext});
+  final BuildContext parentContext;
   String userName = '';
   String dept = '';
   String roleName = '';
@@ -103,7 +107,7 @@ class _MineScreenState extends State<MineScreen> {
                   color: Color(0xFFFFFFFF),
                 ),
                 child: CupertinoButton(
-                  onPressed: () => logOut(context),
+                  onPressed: () => logOut(parentContext),
                   child: Text('登出',
                       style: TextStyle(color: Color(0xFFe83f34), fontSize: 16)),
                 ))

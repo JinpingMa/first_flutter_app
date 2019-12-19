@@ -30,11 +30,11 @@ class NavigationBarScreen extends StatelessWidget {
 
 class AdaptiveMainScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext parentContext) {
     if (isIOS) {
       return CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
-          currentIndex: 2,
+          currentIndex: 4,
           items: [
             BottomNavigationBarItem(
               title: Text('首页'),
@@ -71,9 +71,9 @@ class AdaptiveMainScreen extends StatelessWidget {
                   builder: (context) => ListScreen(),
                   defaultTitle: ListScreen.title);
             case 4:
-              return CupertinoTabView(builder: (context) => ListScreen(),);
+              return CupertinoTabView(builder: (context) => MineScreen(parentContext:parentContext),);
             default:
-              return CupertinoTabView(builder: (context) => MineScreen(),);
+              return CupertinoTabView(builder: (context) => MineScreen(parentContext:parentContext),);
           }
         },
       );
