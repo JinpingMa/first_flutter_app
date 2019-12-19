@@ -6,6 +6,7 @@ import 'package:f_stellar_app/src/picker_example/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:f_stellar_app/src/data/models.dart';
 import 'package:f_stellar_app/src/data/veggie.dart';
@@ -65,7 +66,7 @@ class AdaptiveMainScreen extends StatelessWidget {
             case 1:
               return CupertinoTabView(builder: (context) => LogScreen(),);
             case 2:
-              return CupertinoTabView(builder: (context) => ClientFormScreen(),);
+              return CupertinoTabView(builder: (context) => AdditionDialog(parentContext:parentContext),);
             case 3:
               return CupertinoTabView(
                   builder: (context) => ListScreen(),
@@ -332,6 +333,38 @@ class _AddToLogFormState extends State<AddToLogForm> {
             ),
           ),
         ),
+      ],
+    );
+  }
+}
+
+class AdditionDialog extends StatelessWidget {
+  const AdditionDialog({this.parentContext});
+  final BuildContext parentContext;
+  void navigateToClientForm(context) {
+    if (context != null) {
+      Navigator.of(context).push(
+          new MaterialPageRoute(builder: (context) => new ClientFormScreen()));
+    }
+  }
+  void navigateToOther() {
+    Fluttertoast.showToast(
+        msg: "该功能赞未实现",
+        gravity: ToastGravity.CENTER,
+        timeInSecForIos: 3,
+        toastLength: Toast.LENGTH_SHORT,
+        backgroundColor: Colors.grey,
+        textColor: Colors.white);
+  }
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        FlatButton(child: Text('录门店', style: TextStyle(color:Color(0xFFFF2D55),fontSize: 16)),onPressed: navigateToOther,),
+        FlatButton(child: Text('录客户', style: TextStyle(color:Color(0xFFFF2D55),fontSize: 16)),onPressed: () => navigateToClientForm(parentContext),),
+        FlatButton(child: Text('录拜访', style: TextStyle(color:Color(0xFFFF2D55),fontSize: 16)),onPressed: navigateToOther,),
       ],
     );
   }
