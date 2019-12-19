@@ -25,14 +25,14 @@ class _LoginPageState extends State<LoginPage> {
       print(data);
       if (data["x"]["ok"]) {
 //          Navigator.pushNamed(context, '/main_page');
-//      Navigator.of(context).pushAndRemoveUntil(
-//          new MaterialPageRoute(builder: (context) => new MainPage()),
-//          (route) => route == null);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => NavigationBarScreen(),
-            ));
+      Navigator.of(context).pushAndRemoveUntil(
+          new MaterialPageRoute(builder: (context) => new NavigationBarScreen()),
+          (route) => route == null);
+//        Navigator.push(
+//            context,
+//            MaterialPageRoute(
+//              builder: (context) => NavigationBarScreen(),
+//            ));
       } else {
         setState(() {
           errMsg = data["x"]["msg"];

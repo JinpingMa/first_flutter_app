@@ -20,6 +20,9 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
   String clientName = '';
   String contactName = '';
   String contactPhone = '';
+  String areaString = '省、市、区';
+  List areaArr = [];
+  String specificAddress = '';
 
   void fetchClientTypeData() {
     DioManager.getInstance().post('ClientTypeList', null,
@@ -49,24 +52,38 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
       "clientName":clientName,
       "clientType":clientType,
       "contactList":[{"contactName":contactName,"contactPhone":contactPhone}],
-      "address":""
+      "address":specificAddress,
+      "province": areaArr[0],
+      "city": areaArr[1],
+      "district": areaArr[2]
     };
+
     DioManager.getInstance().post('ClientSave', para,
         //正常回调
             (data) {
-              Fluttertoast.showToast(
-                  msg: "录入客户成功",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                timeInSecForIos: 3,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-              );
+      if(data["x"]["ok"]) {
+        Fluttertoast.showToast(
+          msg: "录入客户成功",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIos: 3,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+        );
+      } else {
+        Fluttertoast.showToast(
+            msg: data["x"]["msg"]!=null?data["x"]["msg"]:"录入客户失败",
+            gravity: ToastGravity.CENTER,
+            timeInSecForIos: 3,
+            toastLength: Toast.LENGTH_SHORT,
+            backgroundColor: Colors.grey,
+            textColor: Colors.white);
+      }
         },
         //错误回调
             (error) {
               Fluttertoast.showToast(
-                  msg: error.x.msg!=null?error.x.msg:"录入客户失败",
+                  msg: error["x"]["msg"]!=null?error["x"]["msg"]:"录入客户失败",
                   gravity: ToastGravity.CENTER,
                   timeInSecForIos: 3,
                   toastLength: Toast.LENGTH_SHORT,
@@ -97,7 +114,7 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: CupertinoNavigationBar(
-        middle: Text('录入客户'),
+        middle: Text('录客户'),
         backgroundColor: Colors.white,
         border: Border(
             bottom: BorderSide(
@@ -111,53 +128,86 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
       body: Container(
         padding: EdgeInsets.all(10.0),
         alignment: Alignment.topCenter,
-        child: ListView(
-          children: <Widget>[
-            CustomInputCell(
-              label: '客户名称',
-              placeholder: '不超过30个字',
-              onValueChange: (val) {
-                setState(() {
-                  clientName = val;
-                });
-              },
-//                    () {}
-            ),
-            CustomCell(
-                label: '客户类型',
-                value: clientType,
-                onCellTap: () {
-                  showPicker(context);
-                }),
-            CustomInputCell(
-              label: '联系人',
-              placeholder: '请填写',
-              onValueChange: (val) {
-                setState(() {
-                  contactName = val;
-                });
-              },
-            ),
-            CustomInputCell(
-              label: '联系电话',
-              placeholder: '请填写',
-              onValueChange: (val) {
-                setState(() {
-                  contactPhone = val;
-                });
-              },
-            ),
-            submitButton
-          ],
-        ),
+        child: Stack(children: <Widget>[
+          ListView(
+            children: <Widget>[
+              CustomInputCell(
+                label: '客户名称',
+                placeholder: '不超过30个字',
+                onValueChange: (val) {
+                  setState(() {
+                    clientName = val;
+                  });
+                },
+              ),
+              CustomCell(
+                  label: '客户类型',
+                  value: clientType,
+                  rightIcon: Icon(
+                    Icons.expand_more,
+                    color: Colors.black54,
+                    size: 36.0,
+                    semanticLabel: 'Text to announce in accessibility modes',
+                  ),
+                  onCellTap: () {
+                    showClientTypePicker(context);
+                  }),
+              CustomCell(
+                  label: '客户地址',
+                  value: areaString,
+                  rightIcon: Icon(
+                    Icons.expand_more,
+                    color: Colors.black54,
+                    size: 36.0,
+                    semanticLabel: 'Text to announce in accessibility modes',
+                  ),
+                  onCellTap: () {
+                    showAreaPicker(context);
+                  }),
+              CustomInputCell(
+                placeholder: '详细地址，最少5个字',
+                onValueChange: (val) {
+                  setState(() {
+                    specificAddress = val;
+                  });
+                },
+              ),
+              CustomInputCell(
+                label: '联系人',
+                placeholder: '请填写',
+                onValueChange: (val) {
+                  setState(() {
+                    contactName = val;
+                  });
+                },
+              ),
+              CustomInputCell(
+                  label: '联系电话',
+                  placeholder: '请填写',
+                  onValueChange: (val) {
+                    setState(() {
+                      contactPhone = val;
+                    });
+                  }
+              )
+//            submitButton
+            ],
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0.0,
+            child: submitButton,
+          )
+        ],),
       ),
     );
   }
 
-  showPicker(BuildContext context) {
+  showClientTypePicker(BuildContext context) {
     Picker picker = Picker(
         adapter: PickerDataAdapter<String>(
-            pickerdata: JsonDecoder().convert(AreaData)),
+            pickerdata: JsonDecoder().convert(clientTypeList)),
         changeToFirst: true,
         textAlign: TextAlign.left,
         textStyle: const TextStyle(color: Colors.blue),
@@ -174,6 +224,27 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
         });
     picker.show(_scaffoldKey.currentState);
   }
+  showAreaPicker(BuildContext context) {
+    Picker picker = Picker(
+        adapter: PickerDataAdapter<String>(
+            pickerdata: JsonDecoder().convert(AreaData)),
+        changeToFirst: true,
+        textAlign: TextAlign.left,
+        textStyle: const TextStyle(color: Colors.blue),
+        selectedTextStyle: TextStyle(color: Colors.red),
+        columnPadding: const EdgeInsets.all(8.0),
+        confirmText: "确定",
+        confirmTextStyle: TextStyle(color: Colors.red),
+        cancelText: "取消",
+        cancelTextStyle: TextStyle(color: Colors.grey),
+        onConfirm: (Picker picker, List value) {
+          setState(() {
+            areaString = picker.getSelectedValues().join(" ");
+            areaArr = picker.getSelectedValues();
+          });
+        });
+    picker.show(_scaffoldKey.currentState);
+  }
 }
 
 class CustomInputCell extends StatelessWidget {
@@ -182,7 +253,8 @@ class CustomInputCell extends StatelessWidget {
     this.value = '',
       this.placeholder = '',
       this.onValueChange,
-      this.inputType = ''
+      this.inputType = '',
+    this.rightIcon
   })
       : super();
 
@@ -191,6 +263,7 @@ class CustomInputCell extends StatelessWidget {
   final String value;
   final ValueChanged<String> onValueChange;
   final String inputType;
+  final Widget rightIcon;
 
   Widget build(BuildContext context) {
     return CupertinoButton(
@@ -227,18 +300,20 @@ class CustomInputCell extends StatelessWidget {
                   onChanged: (val) {
                     onValueChange(val);
                   }),
-            )
+            ),
+            rightIcon!=null?rightIcon:Container(width: 0,height: 0,)
           ],
         ));
   }
 }
 
 class CustomCell extends StatelessWidget {
-  const CustomCell({this.label, this.value, this.onCellTap});
+  const CustomCell({this.label, this.value, this.onCellTap,this.rightIcon});
 
   final String label;
   final String value;
   final VoidCallback onCellTap;
+  final Widget rightIcon;
 
   Widget build(BuildContext context) {
     return CupertinoButton(
@@ -255,20 +330,24 @@ class CustomCell extends StatelessWidget {
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width - 168,
+              width: MediaQuery.of(context).size.width - 128,
               decoration: BoxDecoration(
-//                border: BoxBorder()
+                border: Border(
+                  bottom: BorderSide(
+                    width: 1,
+                    color: Colors.grey,
+                  ),
+                ),
               ),
-              child: Text(
-                value,
-                style: TextStyle(color: Colors.black87),
-              ),
-            ),
-            Icon(
-              Icons.expand_more,
-              color: Colors.black54,
-              size: 36.0,
-              semanticLabel: 'Text to announce in accessibility modes',
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                Text(
+                  value.isEmpty?'':value,
+                  style: TextStyle(color: Colors.black87),
+                ),
+                rightIcon!=null?rightIcon:Container(width: 0,height: 0,)
+              ],),
             ),
           ],
         ));

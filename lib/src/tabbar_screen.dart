@@ -35,7 +35,7 @@ class AdaptiveMainScreen extends StatelessWidget {
     if (isIOS) {
       return CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
-          currentIndex: 4,
+          currentIndex: 2,
           items: [
             BottomNavigationBarItem(
               title: Text('首页'),
