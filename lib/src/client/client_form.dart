@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:f_stellar_app/src/data/area.dart';
 
 class ClientFormScreen extends StatefulWidget {
   @override
@@ -25,6 +24,7 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
   String areaString = '省、市、区';
   List areaArr = [];
   String specificAddress = '';
+  String areaPickerDataString = '';
 
   void fetchClientTypeData() {
     DioManager.getInstance().post('ClientTypeList', null,
@@ -96,29 +96,60 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
   List formatAreaPickerData() {
     List areaPickerData = [];
     Map provinceObj = AreaObjData["province_list"];
-    List provinceObjCode = new List.from(provinceObj.keys);
-    Map cityObj = AreaObjData["city_list"];
+    Map<int, String> cityObj = AreaObjData["city_list"];
     Map districtObj = AreaObjData["county_list"];
-    cityObj.forEach((key, value) => {
-//      districtObj.forEach((disKey, disVal) => {
-//        if (key.toString().substring(0,2)==disKey.toString().substring(0,2)){
-//
-//    }
-//      });
+    provinceObj.forEach((proKey, proValue) {
+
+      Map specifyProvinceObj = {};
+      specifyProvinceObj[proValue] =[];
+      List cityList = [];
+    
+      cityObj.forEach((int cityKey, String cityValue) {
+
+        if (proKey.toString().substring(0,2)==cityKey.toString().substring(0,2)){
+
+
+
+
+
+          Map specifyCityObj = {};
+          specifyCityObj[cityValue] = [];
+          List districtList = [];
+          districtObj.forEach((disKey, disVal) {
+            if (cityKey.toString().substring(0,4)==disKey.toString().substring(0,4)){
+              districtList.add(disVal);
+            }
+
+          });
+
+          specifyCityObj[cityValue] = districtList;
+
+
+
+
+
+
+
+
+          cityList.add(specifyCityObj);
+
+        }
+
+      });
+      specifyProvinceObj[proValue] = cityList;
+
+      areaPickerData.add(specifyProvinceObj);
 
     });
-    provinceObj.forEach((key, value) => {
 
-    });
-
-    return [];
+    return areaPickerData;
 
   }
   @override
   void initState() {
     super.initState();
     fetchClientTypeData();
-    areaPickerData = formatAreaPickerData();
+    areaPickerDataString = JsonEncoder().convert(formatAreaPickerData());
   }
 
   @override
@@ -186,7 +217,7 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
                     semanticLabel: 'Text to announce in accessibility modes',
                   ),
                   onCellTap: () {
-                    showAreaPicker(context);
+                    showAreaPicker(context, areaPickerDataString);
                   }),
               CustomInputCell(
                 placeholder: '详细地址，最少5个字',
@@ -248,10 +279,10 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
         });
     picker.show(_scaffoldKey.currentState);
   }
-  showAreaPicker(BuildContext context) {
+  showAreaPicker(BuildContext context, String areaPickerDataString) {
     Picker picker = Picker(
         adapter: PickerDataAdapter<String>(
-            pickerdata: JsonDecoder().convert(AreaData)),
+            pickerdata: JsonDecoder().convert(areaPickerDataString)),
         changeToFirst: true,
         textAlign: TextAlign.left,
         textStyle: const TextStyle(color: Colors.grey),
