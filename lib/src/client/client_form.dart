@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:f_stellar_app/src/data/area.dart';
 
 class ClientFormScreen extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class ClientFormScreen extends StatefulWidget {
 }
 
 class _ClientFormScreenState extends State<ClientFormScreen> {
+  List areaPickerData = [];
   final double listSpec = 4.0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String stateText;
@@ -91,10 +93,32 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
                   textColor: Colors.white);
         });
   }
+  List formatAreaPickerData() {
+    List areaPickerData = [];
+    Map provinceObj = AreaObjData["province_list"];
+    List provinceObjCode = new List.from(provinceObj.keys);
+    Map cityObj = AreaObjData["city_list"];
+    Map districtObj = AreaObjData["county_list"];
+    cityObj.forEach((key, value) => {
+//      districtObj.forEach((disKey, disVal) => {
+//        if (key.toString().substring(0,2)==disKey.toString().substring(0,2)){
+//
+//    }
+//      });
+
+    });
+    provinceObj.forEach((key, value) => {
+
+    });
+
+    return [];
+
+  }
   @override
   void initState() {
     super.initState();
     fetchClientTypeData();
+    areaPickerData = formatAreaPickerData();
   }
 
   @override
@@ -210,8 +234,8 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
             pickerdata: JsonDecoder().convert(clientTypeList)),
         changeToFirst: true,
         textAlign: TextAlign.left,
-        textStyle: const TextStyle(color: Colors.blue),
-        selectedTextStyle: TextStyle(color: Colors.red),
+        textStyle: const TextStyle(color: Colors.grey),
+        selectedTextStyle: TextStyle(color: Colors.black),
         columnPadding: const EdgeInsets.all(8.0),
         confirmText: "确定",
         confirmTextStyle: TextStyle(color: Colors.red),
@@ -230,8 +254,8 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
             pickerdata: JsonDecoder().convert(AreaData)),
         changeToFirst: true,
         textAlign: TextAlign.left,
-        textStyle: const TextStyle(color: Colors.blue),
-        selectedTextStyle: TextStyle(color: Colors.red),
+        textStyle: const TextStyle(color: Colors.grey),
+        selectedTextStyle: TextStyle(color: Colors.black),
         columnPadding: const EdgeInsets.all(8.0),
         confirmText: "确定",
         confirmTextStyle: TextStyle(color: Colors.red),
