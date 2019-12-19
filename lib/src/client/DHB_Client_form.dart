@@ -1,7 +1,6 @@
 import 'package:f_stellar_app/src/utils/request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'dart:convert';
 

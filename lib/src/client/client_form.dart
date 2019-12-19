@@ -320,6 +320,7 @@ class CustomInputCell extends StatelessWidget {
   final String inputType;
   final Widget rightIcon;
 
+
   Widget build(BuildContext context) {
     return CupertinoButton(
         padding: EdgeInsets.zero,
